@@ -63,3 +63,21 @@ server {
     }
 }
 ```
+
+#### Using map
+
+```
+map $uri $log_metrics_rest_to_api {
+    default '';
+
+    # group requests
+    ~^/api/items*    '/api/items';
+}
+
+server {
+    ...
+    location ... {
+        include /etc/nginx/log_by_lua.conf;
+    }
+}
+```
